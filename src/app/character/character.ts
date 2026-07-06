@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CharacterService } from '../core/character';
 
 @Component({
   selector: 'app-character',
-  imports: [],
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './character.html',
   styleUrl: './character.css',
 })
-export class Character {
-
+export class CharacterComponent {
+  characterService = inject(CharacterService);
 }

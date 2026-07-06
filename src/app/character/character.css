@@ -1,0 +1,57 @@
+.screen {
+  padding: 32px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  background: #1f2d50;
+  color: white;
+  min-height: 100vh;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.xp {
+  color: #c9a227;
+  margin-bottom: 24px;
+}
+
+.attr {
+  margin-bottom: 14px;
+}
+
+.attr span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.bar-bg {
+  height: 10px;
+  background: #33425e;
+  border-radius: 5px;
+}
+
+.bar-fill {
+  height: 10px;
+  background: #c9a227;
+  border-radius: 5px;
+}
+
+.streak {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.button {
+  display: block;
+  margin-top: 24px;
+  background: #a0181e;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}

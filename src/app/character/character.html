@@ -1,1 +1,43 @@
-<p>character works!</p>
+<div class="screen">
+  <h1>Nível {{ characterService.character().level }}</h1>
+  <p class="xp">{{ characterService.character().xp }} XP</p>
+
+  <div class="attr">
+    <span>Força</span>
+    <div class="bar-bg">
+      <div class="bar-fill" [style.width.%]="characterService.character().strength"></div>
+    </div>
+  </div>
+
+  <div class="attr">
+    <span>Resistência</span>
+    <div class="bar-bg">
+      <div class="bar-fill" [style.width.%]="characterService.character().endurance"></div>
+    </div>
+  </div>
+
+  <div class="attr">
+    <span>Disciplina</span>
+    <div class="bar-bg">
+      <div class="bar-fill" [style.width.%]="characterService.character().discipline"></div>
+    </div>
+  </div>
+
+  <div class="attr">
+    <span>Nutrição</span>
+    <div class="bar-bg">
+      <div class="bar-fill" [style.width.%]="characterService.character().nutrition"></div>
+    </div>
+  </div>
+
+  <div class="attr">
+    <span>Recuperação</span>
+    <div class="bar-bg">
+      <div class="bar-fill" [style.width.%]="characterService.character().recovery"></div>
+    </div>
+  </div>
+
+  <p class="streak">Streak: {{ characterService.character().streakDays }} dias</p>
+
+  <a routerLink="/treino" class="button">Registrar treino de hoje</a>
+</div>
