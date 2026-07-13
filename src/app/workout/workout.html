@@ -1,6 +1,71 @@
 <div class="screen">
-  <h2>O que você fez hoje?</h2>
-  <button (click)="log('forca')">Treino de Força</button>
-  <button (click)="log('cardio')">Cardio</button>
-  <button (click)="log('descanso')">Dia de Descanso</button>
+  <!-- ETAPA 1: ESCOLHER GRUPO MUSCULAR -->
+  @if (step() === 'grupo') {
+    <h2>Qual grupo muscular hoje?</h2>
+    <div class="grupo-list">
+      @for (grupo of grupos; track grupo.nome) {
+        <button class="btn-grupo" (click)="selecionarGrupo(grupo)">
+          {{ grupo.nome }}
+        </button>
+      }
+    </div>
+  }
+
+  <!-- ETAPA 2: SELECIONAR EXERCÍCIOS -->
+  @if (step() === 'exercicios') {
+    <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+    <h2>{{ grupoSelecionado()?.nome }}</h2>
+    <p class="subtitle">Selecione os exercícios de hoje</p>
+
+    @for (subgrupo of grupoSelecionado()?.subgrupos; track subgrupo.nome) {
+      <h3 class="subgrupo-title">{{ subgrupo.nome }}</h3>
+      @for (ex of subgrupo.exercicios; track ex.nome) {
+        <div
+          class="exercise-item"
+          [class.selected]="exerciciosSelecionados().includes(ex.nome)"
+          (click)="toggleExercicio(ex.nome)"
+        >
+          <span class="exercise-name">{{ ex.nome }}</span>
+          <span class="exercise-equip">{{ ex.equipamento }}</span>
+        </div>
+      }
+    }
+
+    <button
+      class="btn-confirmar"
+      [disabled]="exerciciosSelecionados().length === 0"
+      (click)="confirmarExercicios()"
+    >
+      Confirmar ({{ exerciciosSelecionados().length }} exercícios)
+    </button>
+  }
+
+  <!-- ETAPA 3: REGISTRAR SÉRIES, REPS E CARGA -->
+  @if (step() === 'series') {
+    <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+    <h2>Registrar cargas</h2>
+    <p class="subtitle">Preencha séries, repetições e carga de cada exercício</p>
+
+    @for (ex of series(); track ex.nome; let i = $index) {
+      <div class="series-card">
+        <h3>{{ ex.nome }}</h3>
+        <div class="series-fields">
+          <div class="field-group">
+            <label>Séries</label>
+            <input type="number" [(ngModel)]="series()[i].series" min="1" />
+          </div>
+          <div class="field-group">
+            <label>Reps</label>
+            <input type="number" [(ngModel)]="series()[i].repeticoes" min="1" />
+          </div>
+          <div class="field-group">
+            <label>Carga (kg)</label>
+            <input type="number" [(ngModel)]="series()[i].carga" min="0" />
+          </div>
+        </div>
+      </div>
+    }
+
+    <button class="btn-finalizar" (click)="finalizar()">Finalizar treino e ganhar XP</button>
+  }
 </div>
