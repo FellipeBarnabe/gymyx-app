@@ -59,12 +59,14 @@ h3 {
 .exercise-item {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 14px 16px;
   border: 1.5px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 56px;
+  justify-content: center;
 }
 
 .exercise-item.selected {
@@ -75,13 +77,13 @@ h3 {
 .exercise-name {
   font-weight: bold;
   color: #1f2d50;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .exercise-equip {
   font-size: 12px;
   color: #888;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .btn-confirmar {
@@ -106,6 +108,25 @@ h3 {
 }
 
 /* ETAPA 3 */
+.btn-marcar-todos {
+  width: 100%;
+  background: transparent;
+  border: 2px solid #1f2d50;
+  color: #1f2d50;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.btn-marcar-todos:disabled {
+  border-color: #c9a227;
+  color: #c9a227;
+  cursor: default;
+}
+
 .series-card {
   background: #f9f9f9;
   border: 2px solid #1f2d50;
@@ -114,10 +135,44 @@ h3 {
   margin-bottom: 14px;
 }
 
-.series-card h3 {
-  color: #1f2d50;
-  font-size: 14px;
+.series-card.concluido {
+  border-color: #c9a227;
+  background: #fffbf0;
+}
+
+.series-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+}
+
+.series-card-header h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #1f2d50;
+}
+
+.btn-check {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #1f2d50;
+  background: transparent;
+  color: #1f2d50;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.btn-check.checked {
+  background: #c9a227;
+  border-color: #c9a227;
+  color: white;
 }
 
 .series-fields {

@@ -46,9 +46,27 @@
     <h2>Registrar cargas</h2>
     <p class="subtitle">Preencha séries, repetições e carga de cada exercício</p>
 
+    <button
+      class="btn-marcar-todos"
+      [class.ativo]="!todosConcluidos"
+      (click)="marcarTodos()"
+      [disabled]="todosConcluidos"
+    >
+      ✓ Marcar todos como concluídos
+    </button>
+
     @for (ex of series(); track ex.nome; let i = $index) {
-      <div class="series-card">
-        <h3>{{ ex.nome }}</h3>
+      <div class="series-card" [class.concluido]="series()[i].concluido">
+        <div class="series-card-header">
+          <h3>{{ ex.nome }}</h3>
+          <button
+            class="btn-check"
+            [class.checked]="series()[i].concluido"
+            (click)="toggleConcluido(i)"
+          >
+            {{ series()[i].concluido ? '✓' : '○' }}
+          </button>
+        </div>
         <div class="series-fields">
           <div class="field-group">
             <label>Séries</label>
@@ -66,6 +84,8 @@
       </div>
     }
 
-    <button class="btn-finalizar" (click)="finalizar()">Finalizar treino e ganhar XP</button>
+    @if (algumConcluido) {
+      <button class="btn-finalizar" (click)="finalizar()">Finalizar treino e ganhar XP</button>
+    }
   }
 </div>

@@ -25,7 +25,15 @@ export class WorkoutComponent {
   grupoSelecionado = signal<MuscleGroup | null>(null);
   exerciciosSelecionados = signal<string[]>([]);
 
-  series = signal<{ nome: string; series: number; repeticoes: number; carga: number }[]>([]);
+  series = signal<
+    {
+      nome: string;
+      series: number;
+      repeticoes: number;
+      carga: number;
+      concluido: boolean;
+    }[]
+  >([]);
 
   selecionarGrupo(grupo: MuscleGroup) {
     this.grupoSelecionado.set(grupo);
@@ -48,28 +56,50 @@ export class WorkoutComponent {
       series: 3,
       repeticoes: 12,
       carga: 0,
+      concluido: false,
     }));
     this.series.set(lista);
     this.step.set('series');
+  }
+
+  toggleConcluido(index: number) {
+    const lista = [...this.series()];
+    lista[index] = { ...lista[index], concluido: !lista[index].concluido };
+    this.series.set(lista);
+  }
+
+  marcarTodos() {
+    const todos = this.series().map((e) => ({ ...e, concluido: true }));
+    this.series.set(todos);
+  }
+
+  get algumConcluido() {
+    return this.series().some((e) => e.concluido);
+  }
+
+  get todosConcluidos() {
+    return this.series().every((e) => e.concluido);
   }
 
   finalizar() {
     const grupo = this.grupoSelecionado();
     if (!grupo) return;
 
-    const exercicios = this.series().map((e) => {
-      const ex = grupo.subgrupos.flatMap((s) => s.exercicios).find((x) => x.nome === e.nome);
-      return {
-        nome: e.nome,
-        equipamento: ex?.equipamento ?? '',
-        subgrupo: ex
-          ? (grupo.subgrupos.find((s) => s.exercicios.some((x) => x.nome === e.nome))?.nome ?? '')
-          : '',
-        series: e.series,
-        repeticoes: e.repeticoes,
-        carga: e.carga,
-      };
-    });
+    const exercicios = this.series()
+      .filter((e) => e.concluido)
+      .map((e) => {
+        const ex = grupo.subgrupos.flatMap((s) => s.exercicios).find((x) => x.nome === e.nome);
+        return {
+          nome: e.nome,
+          equipamento: ex?.equipamento ?? '',
+          subgrupo: ex
+            ? (grupo.subgrupos.find((s) => s.exercicios.some((x) => x.nome === e.nome))?.nome ?? '')
+            : '',
+          series: e.series,
+          repeticoes: e.repeticoes,
+          carga: e.carga,
+        };
+      });
 
     const { updatedCharacter, xpGanho, atributosGanhos } = logWorkoutSession(
       grupo.nome,
