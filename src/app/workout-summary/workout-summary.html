@@ -1,0 +1,39 @@
+<div class="screen">
+  @if (session) {
+    <div class="header">
+      <div class="xp-badge">+{{ session.xpGanho }} XP</div>
+      <h1>Treino concluído!</h1>
+      <p class="grupo">{{ session.grupoMuscular }}</p>
+    </div>
+
+    <div class="section">
+      <h2>Exercícios realizados</h2>
+      @for (ex of session.exercicios; track ex.nome) {
+        <div class="exercise-row">
+          <span class="ex-nome">{{ ex.nome }}</span>
+          <span class="ex-info"
+            >{{ ex.series }}x{{ ex.repeticoes }}
+            @if (ex.carga > 0) {
+              · {{ ex.carga }}kg
+            }
+          </span>
+        </div>
+      }
+    </div>
+
+    <div class="section">
+      <h2>Atributos ganhos</h2>
+      @for (attr of atributosGanhos; track attr.label) {
+        <div class="attr-row">
+          <span class="attr-label">{{ attr.label }}</span>
+          <span class="attr-ganho">+{{ attr.ganho.toFixed(2) }}</span>
+        </div>
+      }
+      @if (atributosGanhos.length === 0) {
+        <p class="empty">Nenhum atributo atualizado.</p>
+      }
+    </div>
+
+    <button class="btn-continuar" (click)="continuar()">Ver meu personagem</button>
+  }
+</div>

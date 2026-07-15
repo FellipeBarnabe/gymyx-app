@@ -1,0 +1,105 @@
+.screen {
+  padding: 32px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  padding-bottom: 60px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.xp-badge {
+  display: inline-block;
+  background: #c9a227;
+  color: #1f2d50;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  color: #1f2d50;
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.grupo {
+  color: #888;
+  font-size: 14px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+h2 {
+  color: #1f2d50;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ex-nome {
+  font-weight: bold;
+  color: #1f2d50;
+  font-size: 14px;
+}
+
+.ex-info {
+  color: #888;
+  font-size: 13px;
+}
+
+.attr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.attr-label {
+  color: #1f2d50;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.attr-ganho {
+  color: #c9a227;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.empty {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.btn-continuar {
+  width: 100%;
+  background: #1f2d50;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}

@@ -109,7 +109,7 @@ export class WorkoutComponent {
 
     this.sessionService.finishSession(xpGanho, atributosGanhos);
     this.characterService.update(updatedCharacter);
-    this.router.navigate(['/personagem']);
+    this.router.navigate(['/resumo']);
   }
 
   voltar() {
