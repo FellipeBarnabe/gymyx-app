@@ -1,78 +1,87 @@
 <div class="screen">
-  <button class="btn-voltar" (click)="voltar()">← Voltar</button>
-  <h1>Medidas corporais</h1>
-  <p class="subtitle">Registre suas medidas a cada 15 dias com uma fita métrica</p>
+  @if (!mostrarBoosts) {
+    <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+    <h1>Medidas corporais</h1>
+    <p class="subtitle">Registre suas medidas a cada 15 dias com uma fita métrica</p>
 
-  @if (ultimaMedida) {
-    <div class="ultima-medida">
-      <h2>Última medição — {{ formatarData(ultimaMedida.data) }}</h2>
-      <div class="medida-row">
-        <span>Braço direito</span>
-        <span>{{ ultimaMedida.bracoDireito }} cm</span>
+    @if (ultimaMedida) {
+      <div class="ultima-medida">
+        <h2>Última medição — {{ formatarData(ultimaMedida.data) }}</h2>
+        <div class="medida-row">
+          <span>Braço direito</span><span>{{ ultimaMedida.bracoDireito }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Braço esquerdo</span><span>{{ ultimaMedida.bracoEsquerdo }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Tríceps</span><span>{{ ultimaMedida.triceps }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Peito</span><span>{{ ultimaMedida.peito }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Coxa</span><span>{{ ultimaMedida.coxa }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Panturrilha</span><span>{{ ultimaMedida.panturrilha }} cm</span>
+        </div>
+        <div class="medida-row">
+          <span>Glúteos</span><span>{{ ultimaMedida.gluteos }} cm</span>
+        </div>
       </div>
-      <div class="medida-row">
-        <span>Braço esquerdo</span>
-        <span>{{ ultimaMedida.bracoEsquerdo }} cm</span>
-      </div>
-      <div class="medida-row">
-        <span>Tríceps</span>
-        <span>{{ ultimaMedida.triceps }} cm</span>
-      </div>
-      <div class="medida-row">
-        <span>Peito</span>
-        <span>{{ ultimaMedida.peito }} cm</span>
-      </div>
-      <div class="medida-row">
-        <span>Coxa</span>
-        <span>{{ ultimaMedida.coxa }} cm</span>
-      </div>
-      <div class="medida-row">
-        <span>Panturrilha</span>
-        <span>{{ ultimaMedida.panturrilha }} cm</span>
-      </div>
-      <div class="medida-row">
-        <span>Glúteos</span>
-        <span>{{ ultimaMedida.gluteos }} cm</span>
-      </div>
+    }
+
+    <h2>Nova medição</h2>
+
+    <div class="field">
+      <label>Braço direito (cm)</label>
+      <input type="number" [(ngModel)]="form.bracoDireito" min="0" step="0.1" />
     </div>
+    <div class="field">
+      <label>Braço esquerdo (cm)</label>
+      <input type="number" [(ngModel)]="form.bracoEsquerdo" min="0" step="0.1" />
+    </div>
+    <div class="field">
+      <label>Tríceps (cm)</label>
+      <input type="number" [(ngModel)]="form.triceps" min="0" step="0.1" />
+    </div>
+    <div class="field">
+      <label>Peito (cm)</label>
+      <input type="number" [(ngModel)]="form.peito" min="0" step="0.1" />
+    </div>
+    <div class="field">
+      <label>Coxa (cm)</label>
+      <input type="number" [(ngModel)]="form.coxa" min="0" step="0.1" />
+    </div>
+    <div class="field">
+      <label>Panturrilha (cm)</label>
+      <input type="number" [(ngModel)]="form.panturrilha" min="0" step="0.1" />
+    </div>
+    <div class="field">
+      <label>Glúteos (cm)</label>
+      <input type="number" [(ngModel)]="form.gluteos" min="0" step="0.1" />
+    </div>
+
+    <button class="btn-salvar" (click)="salvar()">Salvar medidas</button>
   }
 
-  <h2>Nova medição</h2>
+  @if (mostrarBoosts) {
+    <div class="header">
+      <div class="xp-badge">Seu corpo evoluiu!</div>
+      <h1>Atributos atualizados</h1>
+      <p class="subtitle">Suas medidas geraram booosts no seu personagem</p>
+    </div>
 
-  <div class="field">
-    <label>Braço direito (cm)</label>
-    <input type="number" [(ngModel)]="form.bracoDireito" min="0" step="0.1" />
-  </div>
+    <div class="section">
+      <h2>Ganhos registrados</h2>
+      @for (boost of boostsGerados; track boost.label) {
+        <div class="boost-row">
+          <span class="boost-label">{{ boost.label }}</span>
+          <span class="boost-ganho">+{{ boost.ganho.toFixed(2) }}</span>
+        </div>
+      }
+    </div>
 
-  <div class="field">
-    <label>Braço esquerdo (cm)</label>
-    <input type="number" [(ngModel)]="form.bracoEsquerdo" min="0" step="0.1" />
-  </div>
-
-  <div class="field">
-    <label>Tríceps (cm)</label>
-    <input type="number" [(ngModel)]="form.triceps" min="0" step="0.1" />
-  </div>
-
-  <div class="field">
-    <label>Peito (cm)</label>
-    <input type="number" [(ngModel)]="form.peito" min="0" step="0.1" />
-  </div>
-
-  <div class="field">
-    <label>Coxa (cm)</label>
-    <input type="number" [(ngModel)]="form.coxa" min="0" step="0.1" />
-  </div>
-
-  <div class="field">
-    <label>Panturrilha (cm)</label>
-    <input type="number" [(ngModel)]="form.panturrilha" min="0" step="0.1" />
-  </div>
-
-  <div class="field">
-    <label>Glúteos (cm)</label>
-    <input type="number" [(ngModel)]="form.gluteos" min="0" step="0.1" />
-  </div>
-
-  <button class="btn-salvar" (click)="salvar()">Salvar medidas</button>
+    <button class="btn-salvar" (click)="continuar()">Ver meu personagem</button>
+  }
 </div>

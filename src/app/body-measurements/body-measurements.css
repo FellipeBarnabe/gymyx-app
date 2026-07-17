@@ -102,3 +102,43 @@ h2 {
   margin-bottom: 16px;
   font-weight: bold;
 }
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.xp-badge {
+  display: inline-block;
+  background: #c9a227;
+  color: #1f2d50;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.boost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.boost-label {
+  color: #1f2d50;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.boost-ganho {
+  color: #c9a227;
+  font-weight: bold;
+  font-size: 15px;
+}

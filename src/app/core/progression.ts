@@ -1,5 +1,6 @@
 import { Character } from './character.model';
 import { WorkoutExercise } from './workout-session.model';
+import { BodyMeasurement } from './profile.service';
 
 export type WorkoutType = 'forca' | 'cardio' | 'descanso';
 
@@ -106,4 +107,67 @@ export function logWorkout(type: WorkoutType, character: Character): Character {
   updated.discipline += diminishingGain(character.discipline, 1.5);
   if (updated.xp >= updated.level * 100) updated.level += 1;
   return updated;
+}
+
+export function calcularBoostMedidas(
+  ultimaMedida: BodyMeasurement,
+  penultimaMedida: BodyMeasurement,
+  character: Character,
+): {
+  updatedCharacter: Character;
+  boosts: { label: string; atributo: string; ganho: number }[];
+} {
+  const updated: Character = { ...character };
+  const boosts: { label: string; atributo: string; ganho: number }[] = [];
+
+  function aplicarBoost(
+    label: string,
+    atributo: keyof Character,
+    deltaCm: number,
+    multiplicador: number,
+  ) {
+    if (deltaCm <= 0) return;
+    const ganho = diminishingGain(updated[atributo] as number, deltaCm * multiplicador);
+    (updated[atributo] as number) += ganho;
+    boosts.push({ label, atributo, ganho });
+  }
+
+  const deltaBracoDireito = ultimaMedida.bracoDireito - penultimaMedida.bracoDireito;
+  const deltaBracoEsquerdo = ultimaMedida.bracoEsquerdo - penultimaMedida.bracoEsquerdo;
+  const deltaTriceps = ultimaMedida.triceps - penultimaMedida.triceps;
+  const deltaPeito = ultimaMedida.peito - penultimaMedida.peito;
+  const deltaCoxa = ultimaMedida.coxa - penultimaMedida.coxa;
+  const deltaPanturrilha = ultimaMedida.panturrilha - penultimaMedida.panturrilha;
+  const deltaGluteos = ultimaMedida.gluteos - penultimaMedida.gluteos;
+
+  // Braços → Força
+  const deltasBracos = (deltaBracoDireito + deltaBracoEsquerdo) / 2;
+  aplicarBoost('Braço', 'strength', deltasBracos, 4);
+
+  // Tríceps → Força
+  aplicarBoost('Tríceps', 'strength', deltaTriceps, 3);
+
+  // Peito → Força + Resistência
+  aplicarBoost('Peito (Força)', 'strength', deltaPeito, 3);
+  aplicarBoost('Peito (Resistência)', 'endurance', deltaPeito, 2);
+
+  // Coxa + Glúteos → Força + Resistência
+  aplicarBoost('Coxa (Força)', 'strength', deltaCoxa, 4);
+  aplicarBoost('Coxa (Resistência)', 'endurance', deltaCoxa, 2);
+  aplicarBoost('Glúteos', 'strength', deltaGluteos, 3);
+
+  // Panturrilha → Resistência
+  aplicarBoost('Panturrilha', 'endurance', deltaPanturrilha, 2);
+
+  // XP proporcional ao total de boosts
+  const totalDelta =
+    deltasBracos + deltaTriceps + deltaPeito + deltaCoxa + deltaPanturrilha + deltaGluteos;
+  if (totalDelta > 0) {
+    updated.xp += Math.round(totalDelta * 10);
+    if (updated.xp >= updated.level * 100) {
+      updated.level += 1;
+    }
+  }
+
+  return { updatedCharacter: updated, boosts };
 }
