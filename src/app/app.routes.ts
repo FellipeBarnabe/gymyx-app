@@ -3,6 +3,7 @@ import { CharacterComponent } from './character/character';
 import { WorkoutComponent } from './workout/workout';
 import { ProfileComponent } from './profile/profile';
 import { WorkoutSummaryComponent } from './workout-summary/workout-summary';
+import { BodyMeasurementsComponent } from './body-measurements/body-measurements';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'personagem', pathMatch: 'full' },
@@ -10,4 +11,5 @@ export const routes: Routes = [
   { path: 'treino', component: WorkoutComponent },
   { path: 'perfil', component: ProfileComponent },
   { path: 'resumo', component: WorkoutSummaryComponent },
+  { path: 'medidas', component: BodyMeasurementsComponent },
 ];

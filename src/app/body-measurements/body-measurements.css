@@ -1,0 +1,104 @@
+.screen {
+  padding: 32px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  padding-bottom: 60px;
+}
+
+h1 {
+  color: #1f2d50;
+  margin-bottom: 4px;
+}
+
+h2 {
+  color: #1f2d50;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 24px 0 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.ultima-medida {
+  background: #f4f2ec;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.ultima-medida h2 {
+  border: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.medida-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0ddd5;
+  font-size: 14px;
+  color: #1f2d50;
+}
+
+.medida-row span:last-child {
+  font-weight: bold;
+  color: #c9a227;
+}
+
+.field {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #1f2d50;
+  margin-bottom: 6px;
+}
+
+.field input {
+  padding: 10px 12px;
+  border: 2px solid #1f2d50;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #c9a227;
+}
+
+.btn-salvar {
+  width: 100%;
+  background: #1f2d50;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-voltar {
+  background: none;
+  border: none;
+  color: #1f2d50;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  font-weight: bold;
+}

@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     experiencia: 'iniciante',
     frequenciaSemanal: 3,
     fichaPreenchida: false,
+    medidasHistorico: [],
   };
 
   ngOnInit() {
