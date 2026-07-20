@@ -1,21 +1,33 @@
 .screen {
-  padding: 32px;
+  padding: 32px 24px;
   max-width: 480px;
   margin: 0 auto;
   font-family: sans-serif;
   background: #1f2d50;
   color: white;
   min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
 }
 
 h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .xp {
   color: #c9a227;
-  margin-bottom: 24px;
+  font-size: 16px;
+  margin: 4px 0 0;
+}
+
+.attrs {
+  margin-bottom: 20px;
 }
 
 .attr {
@@ -24,7 +36,9 @@ h1 {
 
 .attr span {
   display: block;
-  margin-bottom: 4px;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #ccc;
 }
 
 .bar-bg {
@@ -37,21 +51,43 @@ h1 {
   height: 10px;
   background: #c9a227;
   border-radius: 5px;
+  transition: width 0.4s ease;
 }
 
 .streak {
-  margin-top: 20px;
+  text-align: center;
   font-size: 14px;
+  color: #ccc;
+  margin-bottom: 28px;
 }
 
-.button {
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-nav {
   display: block;
-  margin-top: 24px;
-  background: #a0181e;
-  color: white;
   text-align: center;
-  padding: 14px;
+  padding: 16px;
   border-radius: 10px;
-  text-decoration: none;
+  font-size: 15px;
   font-weight: bold;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btn-nav:hover {
+  opacity: 0.85;
+}
+
+.btn-primary {
+  background: #c9a227;
+  color: #1f2d50;
+}
+
+.btn-secondary {
+  background: #2a3f6f;
+  color: white;
 }
