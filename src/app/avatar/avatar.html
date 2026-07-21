@@ -1,0 +1,112 @@
+<div class="avatar-container">
+  <svg
+    [attr.viewBox]="'0 0 200 ' + (b.headSize + 280)"
+    xmlns="http://www.w3.org/2000/svg"
+    class="avatar-svg"
+  >
+    <!-- CABEÇA -->
+    <ellipse
+      [attr.cx]="cx"
+      [attr.cy]="headY + b.headSize / 2"
+      [attr.rx]="b.headSize * 0.75"
+      [attr.ry]="b.headSize / 2"
+      [attr.fill]="b.skinColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="2"
+    />
+
+    <!-- PESCOÇO -->
+    <rect
+      [attr.x]="cx - b.neckWidth / 2"
+      [attr.y]="neckY"
+      [attr.width]="b.neckWidth"
+      height="16"
+      [attr.fill]="b.skinColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+
+    <!-- OMBROS -->
+    <ellipse
+      [attr.cx]="cx"
+      [attr.cy]="shoulderY"
+      [attr.rx]="b.shoulderWidth / 2"
+      ry="12"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="2"
+    />
+
+    <!-- PEITO -->
+    <rect
+      [attr.x]="cx - b.chestWidth / 2"
+      [attr.y]="chestY"
+      [attr.width]="b.chestWidth"
+      [attr.height]="b.chestHeight"
+      rx="8"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="2"
+    />
+
+    <!-- BRAÇO ESQUERDO -->
+    <rect
+      [attr.x]="cx - b.shoulderWidth / 2 - b.armWidth"
+      [attr.y]="shoulderY"
+      [attr.width]="b.armWidth"
+      [attr.height]="b.armLength"
+      rx="5"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+
+    <!-- BRAÇO DIREITO -->
+    <rect
+      [attr.x]="cx + b.shoulderWidth / 2"
+      [attr.y]="shoulderY"
+      [attr.width]="b.armWidth"
+      [attr.height]="b.armLength"
+      rx="5"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+
+    <!-- ABDÔMEN -->
+    <rect
+      [attr.x]="cx - b.abdomenWidth / 2"
+      [attr.y]="abdomenY"
+      [attr.width]="b.abdomenWidth"
+      [attr.height]="b.abdomenHeight"
+      rx="6"
+      [attr.fill]="b.skinColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+
+    <!-- PERNA ESQUERDA -->
+    <rect
+      [attr.x]="cx - b.legWidth - 4"
+      [attr.y]="legY"
+      [attr.width]="b.legWidth"
+      [attr.height]="b.legLength"
+      rx="6"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+
+    <!-- PERNA DIREITA -->
+    <rect
+      [attr.x]="cx + 4"
+      [attr.y]="legY"
+      [attr.width]="b.legWidth"
+      [attr.height]="b.legLength"
+      rx="6"
+      [attr.fill]="b.muscleColor"
+      [attr.stroke]="b.outlineColor"
+      stroke-width="1.5"
+    />
+  </svg>
+</div>

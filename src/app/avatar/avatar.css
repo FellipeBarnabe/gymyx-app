@@ -1,0 +1,12 @@
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.avatar-svg {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.3));
+}
