@@ -1,1 +1,84 @@
-<p>progress works!</p>
+<div class="screen">
+  <h1>Progresso</h1>
+
+  <!-- RESUMO GERAL -->
+  <div class="cards">
+    <div class="card">
+      <span class="card-value">{{ nivel }}</span>
+      <span class="card-label">Nível</span>
+    </div>
+    <div class="card">
+      <span class="card-value">{{ totalTreinos }}</span>
+      <span class="card-label">Treinos</span>
+    </div>
+    <div class="card">
+      <span class="card-value">{{ streakDias }}</span>
+      <span class="card-label">Streak</span>
+    </div>
+  </div>
+
+  <!-- XP ATÉ PRÓXIMO NÍVEL -->
+  <div class="section">
+    <h2>XP — Nível {{ nivel }}</h2>
+    <div class="xp-info">
+      <span>{{ xp }} / {{ xpProximoNivel }} XP</span>
+      <span>{{ xpPercent.toFixed(0) }}%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill xp-bar" [style.width.%]="xpPercent"></div>
+    </div>
+  </div>
+
+  <!-- ATRIBUTOS -->
+  <div class="section">
+    <h2>Atributos</h2>
+    @for (attr of atributos; track attr.key) {
+      <div class="attr-row">
+        <div class="attr-header">
+          <span class="attr-label">{{ attr.label }}</span>
+          <span class="attr-value">{{ getValor(attr.key).toFixed(1) }}</span>
+        </div>
+        <div class="bar-bg">
+          <div
+            class="bar-fill"
+            [style.width.%]="getWidth(attr.key)"
+            [style.background]="attr.cor"
+          ></div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- HISTÓRICO DE TREINOS -->
+  <div class="section">
+    <h2>Histórico de treinos</h2>
+    @if (history().length === 0) {
+      <p class="empty">Nenhum treino registrado ainda.</p>
+    }
+    @for (session of history(); track session.id) {
+      <div class="session-card">
+        <div class="session-header">
+          <span class="session-grupo">{{ session.grupoMuscular }}</span>
+          <span class="session-data">{{ formatarData(session.data) }}</span>
+        </div>
+        <div class="session-info">
+          <span>{{ session.exercicios.length }} exercícios</span>
+          <span class="session-xp">+{{ session.xpGanho }} XP</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- RECORDES PESSOAIS -->
+  @if (recordes.length > 0) {
+    <div class="section">
+      <h2>🏆 Recordes pessoais</h2>
+      @for (rec of recordes; track rec.exercicio) {
+        <div class="record-row">
+          <span class="record-nome">{{ rec.exercicio }}</span>
+          <span class="record-carga">{{ rec.carga }} kg</span>
+        </div>
+      }
+    </div>
+  }
+</div>
