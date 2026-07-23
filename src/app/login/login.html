@@ -1,0 +1,26 @@
+<div class="screen">
+  <div class="hero">
+    <div class="logo">⚔️</div>
+    <h1 class="title">Gymyx</h1>
+    <p class="tagline">Seu corpo é o personagem.<br />Treine na vida real, evolua no jogo.</p>
+  </div>
+
+  <div class="actions">
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
+
+    <button class="btn-google" (click)="loginGoogle()" [disabled]="loading">
+      @if (loading) {
+        <span>Entrando...</span>
+      } @else {
+        <span>🔑 Entrar com Google</span>
+      }
+    </button>
+
+    <p class="disclaimer">
+      Ao entrar, você concorda com os termos de uso do Gymyx. Seus dados ficam salvos na nuvem com
+      segurança.
+    </p>
+  </div>
+</div>
