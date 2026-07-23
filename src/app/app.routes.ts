@@ -6,6 +6,7 @@ import { WorkoutSummaryComponent } from './workout-summary/workout-summary';
 import { BodyMeasurementsComponent } from './body-measurements/body-measurements';
 import { ProgressComponent } from './progress/progress';
 import { LoginComponent } from './login/login';
+import { authGuard } from './core/auth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'personagem', pathMatch: 'full' },
