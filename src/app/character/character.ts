@@ -14,4 +14,9 @@ import { AvatarComponent } from '../avatar/avatar';
 export class CharacterComponent {
   characterService = inject(CharacterService);
   authService = inject(AuthService);
+
+  get xpPercent(): number {
+    const c = this.characterService.character();
+    return Math.min((c.xp / (c.level * 100)) * 100, 100);
+  }
 }

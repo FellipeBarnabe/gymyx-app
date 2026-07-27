@@ -9,18 +9,11 @@
         <span class="user-name">{{ authService.userName ?? '' }}</span>
         <div class="xp-row">
           <div class="xp-bar-bg">
-            <div
-              class="xp-bar-fill"
-              [style.width.%]="
-                (characterService.character().xp / (characterService.character().level * 100)) * 100
-              "
-            ></div>
+            <div class="xp-bar-fill" [style.width.%]="xpPercent"></div>
           </div>
-          <span class="xp-text"
-            >{{ characterService.character().xp }}/{{
-              characterService.character().level * 100
-            }}</span
-          >
+          <span class="xp-text">
+            {{ characterService.character().xp }}/{{ characterService.character().level * 100 }}
+          </span>
         </div>
         <span class="streak-text">🔥 {{ characterService.character().streakDays }} dias</span>
       </div>

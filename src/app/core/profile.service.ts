@@ -1,4 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject, effect } from '@angular/core';
+import { DatabaseService } from './database.service';
+import { AuthService } from './auth';
 
 export interface BodyMeasurement {
   data: string;
@@ -39,21 +41,38 @@ const STORAGE_KEY = 'gymyx_profile';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
+  private db = inject(DatabaseService);
+  private authService = inject(AuthService);
+
   profile = signal<UserProfile>(this.loadFromStorage());
+
+  constructor() {
+    effect(() => {
+      const user = this.authService.currentUser();
+      if (user) {
+        this.syncFromCloud();
+      }
+    });
+  }
 
   private loadFromStorage(): UserProfile {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return initialProfile;
     const parsed = JSON.parse(saved);
-    if (!parsed.medidasHistorico) {
-      parsed.medidasHistorico = [];
-    }
+    if (!parsed.medidasHistorico) parsed.medidasHistorico = [];
     return parsed;
+  }
+
+  private async syncFromCloud() {
+    const cloudProfile = await this.db.loadProfile();
+    this.profile.set(cloudProfile);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudProfile));
   }
 
   update(updated: UserProfile) {
     this.profile.set(updated);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    this.db.saveProfile(updated);
   }
 
   addMedida(medida: BodyMeasurement) {

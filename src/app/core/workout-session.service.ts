@@ -1,16 +1,36 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject, effect } from '@angular/core';
 import { WorkoutSession, WorkoutExercise, createSession } from './workout-session.model';
+import { DatabaseService } from './database.service';
+import { AuthService } from './auth';
 
 const STORAGE_KEY = 'gymyx_workout_history';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutSessionService {
+  private db = inject(DatabaseService);
+  private authService = inject(AuthService);
+
   currentSession = signal<WorkoutSession | null>(null);
   history = signal<WorkoutSession[]>(this.loadHistory());
+
+  constructor() {
+    effect(() => {
+      const user = this.authService.currentUser();
+      if (user) {
+        this.syncFromCloud();
+      }
+    });
+  }
 
   private loadHistory(): WorkoutSession[] {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
+  }
+
+  private async syncFromCloud() {
+    const cloudHistory = await this.db.loadWorkoutHistory();
+    this.history.set(cloudHistory);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudHistory));
   }
 
   startSession(grupoMuscular: string) {
@@ -38,6 +58,7 @@ export class WorkoutSessionService {
     const newHistory = [finished, ...this.history()];
     this.history.set(newHistory);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newHistory));
+    this.db.saveWorkoutHistory(newHistory);
     this.currentSession.set(null);
   }
 
