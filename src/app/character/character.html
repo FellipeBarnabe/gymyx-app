@@ -1,11 +1,33 @@
 <div class="screen">
-  <div class="header">
-    <h1>Nível {{ characterService.character().level }}</h1>
-    <p class="xp">{{ characterService.character().xp }} XP</p>
+  <!-- TOPO: USUÁRIO + AVATAR LADO A LADO -->
+  <div class="top-section">
+    <div class="user-panel">
+      @if (authService.userPhoto) {
+        <img [src]="authService.userPhoto" class="user-photo" alt="foto" />
+      }
+      <span class="user-name">{{ authService.userName ?? '' }}</span>
+      <span class="level-badge">Nível {{ characterService.character().level }}</span>
+      <div class="xp-bar-bg">
+        <div
+          class="xp-bar-fill"
+          [style.width.%]="
+            (characterService.character().xp / (characterService.character().level * 100)) * 100
+          "
+        ></div>
+      </div>
+      <span class="xp-text"
+        >{{ characterService.character().xp }} /
+        {{ characterService.character().level * 100 }} XP</span
+      >
+      <p class="streak">🔥 {{ characterService.character().streakDays }} dias</p>
+    </div>
+
+    <div class="avatar-panel">
+      <app-avatar></app-avatar>
+    </div>
   </div>
 
-  <app-avatar></app-avatar>
-
+  <!-- ATRIBUTOS -->
   <div class="attrs">
     <div class="attr">
       <span>Força</span>
@@ -37,13 +59,5 @@
         <div class="bar-fill" [style.width.%]="characterService.character().recovery"></div>
       </div>
     </div>
-  </div>
-
-  <p class="streak">🔥 Streak: {{ characterService.character().streakDays }} dias</p>
-
-  <div class="nav-buttons">
-    <a routerLink="/treino" class="btn-nav btn-primary"> 💪 Registrar treino </a>
-    <a routerLink="/medidas" class="btn-nav btn-secondary"> 📏 Registrar medidas </a>
-    <a routerLink="/perfil" class="btn-nav btn-secondary"> 👤 Minha ficha </a>
   </div>
 </div>

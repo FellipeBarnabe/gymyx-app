@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CharacterService } from '../core/character';
+import { AuthService } from '../core/auth';
 import { AvatarComponent } from '../avatar/avatar';
 
 @Component({
@@ -12,4 +13,5 @@ import { AvatarComponent } from '../avatar/avatar';
 })
 export class CharacterComponent {
   characterService = inject(CharacterService);
+  authService = inject(AuthService);
 }
