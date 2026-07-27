@@ -1,60 +1,81 @@
 <div class="screen">
-  <!-- TOPO: USUÁRIO + AVATAR LADO A LADO -->
-  <div class="top-section">
-    <div class="user-panel">
+  <!-- HEADER COMPACTO -->
+  <div class="header">
+    <div class="header-left">
       @if (authService.userPhoto) {
         <img [src]="authService.userPhoto" class="user-photo" alt="foto" />
       }
-      <span class="user-name">{{ authService.userName ?? '' }}</span>
-      <span class="level-badge">Nível {{ characterService.character().level }}</span>
-      <div class="xp-bar-bg">
-        <div
-          class="xp-bar-fill"
-          [style.width.%]="
-            (characterService.character().xp / (characterService.character().level * 100)) * 100
-          "
-        ></div>
+      <div class="user-details">
+        <span class="user-name">{{ authService.userName ?? '' }}</span>
+        <div class="xp-row">
+          <div class="xp-bar-bg">
+            <div
+              class="xp-bar-fill"
+              [style.width.%]="
+                (characterService.character().xp / (characterService.character().level * 100)) * 100
+              "
+            ></div>
+          </div>
+          <span class="xp-text"
+            >{{ characterService.character().xp }}/{{
+              characterService.character().level * 100
+            }}</span
+          >
+        </div>
+        <span class="streak-text">🔥 {{ characterService.character().streakDays }} dias</span>
       </div>
-      <span class="xp-text"
-        >{{ characterService.character().xp }} /
-        {{ characterService.character().level * 100 }} XP</span
-      >
-      <p class="streak">🔥 {{ characterService.character().streakDays }} dias</p>
     </div>
+    <div class="level-badge">Nv {{ characterService.character().level }}</div>
+  </div>
 
-    <div class="avatar-panel">
-      <app-avatar></app-avatar>
-    </div>
+  <!-- AVATAR CENTRALIZADO -->
+  <div class="avatar-section">
+    <app-avatar></app-avatar>
   </div>
 
   <!-- ATRIBUTOS -->
   <div class="attrs">
     <div class="attr">
-      <span>Força</span>
+      <div class="attr-header">
+        <span>Força</span>
+        <span class="attr-val">{{ characterService.character().strength.toFixed(1) }}</span>
+      </div>
       <div class="bar-bg">
         <div class="bar-fill" [style.width.%]="characterService.character().strength"></div>
       </div>
     </div>
     <div class="attr">
-      <span>Resistência</span>
+      <div class="attr-header">
+        <span>Resistência</span>
+        <span class="attr-val">{{ characterService.character().endurance.toFixed(1) }}</span>
+      </div>
       <div class="bar-bg">
         <div class="bar-fill" [style.width.%]="characterService.character().endurance"></div>
       </div>
     </div>
     <div class="attr">
-      <span>Disciplina</span>
+      <div class="attr-header">
+        <span>Disciplina</span>
+        <span class="attr-val">{{ characterService.character().discipline.toFixed(1) }}</span>
+      </div>
       <div class="bar-bg">
         <div class="bar-fill" [style.width.%]="characterService.character().discipline"></div>
       </div>
     </div>
     <div class="attr">
-      <span>Nutrição</span>
+      <div class="attr-header">
+        <span>Nutrição</span>
+        <span class="attr-val">{{ characterService.character().nutrition.toFixed(1) }}</span>
+      </div>
       <div class="bar-bg">
         <div class="bar-fill" [style.width.%]="characterService.character().nutrition"></div>
       </div>
     </div>
     <div class="attr">
-      <span>Recuperação</span>
+      <div class="attr-header">
+        <span>Recuperação</span>
+        <span class="attr-val">{{ characterService.character().recovery.toFixed(1) }}</span>
+      </div>
       <div class="bar-bg">
         <div class="bar-fill" [style.width.%]="characterService.character().recovery"></div>
       </div>
