@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProfileService, UserProfile } from '../core/profile.service';
+import { AuthService } from '../core/auth';
+import { CharacterService } from '../core/character';
+import { WorkoutSessionService } from '../core/workout-session.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +15,13 @@ import { ProfileService, UserProfile } from '../core/profile.service';
 })
 export class ProfileComponent implements OnInit {
   private profileService = inject(ProfileService);
+  authService = inject(AuthService);
+  private characterService = inject(CharacterService);
+  private sessionService = inject(WorkoutSessionService);
   private router = inject(Router);
+
+  mostrarConfirmacaoReset = false;
+  mostrarConfirmacaoLogout = false;
 
   form: UserProfile = {
     nome: '',
@@ -39,7 +48,14 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/personagem']);
   }
 
-  pular() {
-    this.router.navigate(['/personagem']);
+  async logout() {
+    await this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  resetarDados() {
+    localStorage.clear();
+    this.mostrarConfirmacaoReset = false;
+    this.router.navigate(['/login']);
   }
 }

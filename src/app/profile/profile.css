@@ -1,42 +1,88 @@
 .screen {
-  padding: 32px;
+  padding: 24px 20px;
   max-width: 480px;
   margin: 0 auto;
   font-family: sans-serif;
+  padding-bottom: 80px;
 }
 
 h1 {
   color: #1f2d50;
-  margin-bottom: 4px;
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
-.subtitle {
-  color: #777;
+h2 {
+  color: #1f2d50;
   font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+/* USER CARD */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #1f2d50;
+  border-radius: 12px;
+  padding: 16px;
   margin-bottom: 24px;
 }
 
+.user-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #c9a227;
+  object-fit: cover;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.user-email {
+  color: #888;
+  font-size: 12px;
+}
+
+/* FIELDS */
 .field {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
 }
 
 .field label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
   color: #1f2d50;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .field input,
 .field select {
   padding: 10px 12px;
-  border: 1.5px solid #ccc;
+  border: 1.5px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
   outline: none;
-  transition: border 0.2s;
 }
 
 .field input:focus,
@@ -44,8 +90,8 @@ h1 {
   border-color: #1f2d50;
 }
 
+/* BUTTONS */
 .btn-salvar {
-  display: block;
   width: 100%;
   background: #1f2d50;
   color: white;
@@ -55,17 +101,79 @@ h1 {
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-top: 4px;
 }
 
-.btn-pular {
-  display: block;
+.btn-logout {
   width: 100%;
   background: transparent;
-  color: #999;
-  border: 1.5px solid #ddd;
+  color: #1f2d50;
+  border: 2px solid #1f2d50;
   padding: 12px;
   border-radius: 10px;
   font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.danger-zone {
+  border: 1.5px solid #eb5757;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.danger-zone h2 {
+  color: #eb5757;
+  border-bottom-color: #eb5757;
+}
+
+.danger-text {
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.btn-reset {
+  width: 100%;
+  background: transparent;
+  color: #eb5757;
+  border: 2px solid #eb5757;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.confirm-text {
+  color: #555;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-confirmar {
+  flex: 1;
+  background: #eb5757;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  flex: 1;
+  background: #eee;
+  color: #555;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
 }
