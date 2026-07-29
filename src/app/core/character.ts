@@ -18,6 +18,9 @@ export class CharacterService {
       const user = this.authService.currentUser();
       if (user) {
         this.syncFromCloud();
+      } else if (!this.authService.loading()) {
+        this.character.set(initialCharacter);
+        localStorage.removeItem('gymyx_character');
       }
     });
   }
